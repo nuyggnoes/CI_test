@@ -5,4 +5,9 @@ module.exports = {
     setupFilesAfterEnv: ["@testing-library/jest-dom"],
     testMatch: ["**/*.test.ts", "**/*.test.tsx"],
     moduleFileExtensions: ["ts", "tsx", "js", "jsx"],
+    globals: {
+        "ts-jest": {
+            tsconfig: "./tsconfig.jest.json",
+        },
+    },
 };
