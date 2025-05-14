@@ -12,12 +12,20 @@ export interface ButtonProps {
 }
 
 export const Button = ({ primary = false, size = "medium", backgroundColor, label, ...props }: ButtonProps) => {
-  const modeClass = primary ? styles["button--primary"] : styles["button--secondary"];
-  const sizeClass = styles[`button--${size}`];
+  const baseClass = "font-semibold rounded focus:outline-none transition-colors duration-200";
+  const colorClass = primary
+    ? "bg-blue-600 text-white hover:bg-blue-700"
+    : "bg-white text-gray-800 border border-gray-300 hover:bg-gray-100";
+
+  const sizeClass = {
+    small: "text-sm px-3 py-1.5",
+    medium: "text-base px-4 py-2",
+    large: "text-lg px-5 py-3",
+  }[size];
   return (
     <button
       type="button"
-      className={`${styles.button} ${sizeClass} ${modeClass}`}
+      className={`${baseClass} ${colorClass} ${sizeClass}`}
       style={backgroundColor ? { backgroundColor } : undefined}
       {...props}>
       {label}
