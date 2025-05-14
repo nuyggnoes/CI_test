@@ -10,7 +10,7 @@
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "test": "jest --config=jest.config.js",
-    "chromatic": "chromatic --project-token=chpt_28b6373fcd15615"
+    "chromatic": "chromatic --project-token=$CHROMATIC_PROJECT_TOKEN"
   },
   "dependencies": {
     "next": "15.3.2",
