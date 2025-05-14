@@ -35,4 +35,4 @@ jobs:
         run: npm run build-storybook -- --output-dir=storybook-static
 
       - name: Publish to Chromatic
-        run: npm run chromatic
+        run: npx chromatic --project-token=${{ secrets.CHROMATIC_PROJECT_TOKEN }}
