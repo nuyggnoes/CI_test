@@ -5,6 +5,7 @@ import { Button } from "./Button";
 
 const meta = {
   title: "Test/Button",
+  component: Button,
   parameters: {
     layout: "centered",
   },
