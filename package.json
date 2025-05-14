@@ -9,7 +9,7 @@
     "lint": "next lint",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "test": "jest"
+    "test": "jest --config=jest.config.js"
   },
   "dependencies": {
     "next": "15.3.2",
