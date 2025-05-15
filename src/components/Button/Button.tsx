@@ -1,14 +1,10 @@
-"use client";
-
 import React from "react";
-import styles from "./Button.module.css";
 
-export interface ButtonProps {
+export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   primary?: boolean;
   backgroundColor?: string;
   size?: "small" | "medium" | "large";
   label: string;
-  onClick?: () => void;
 }
 
 export const Button = ({ primary = false, size = "medium", backgroundColor, label, ...props }: ButtonProps) => {
@@ -24,7 +20,6 @@ export const Button = ({ primary = false, size = "medium", backgroundColor, labe
   }[size];
   return (
     <button
-      type="button"
       className={`${baseClass} ${colorClass} ${sizeClass}`}
       style={backgroundColor ? { backgroundColor } : undefined}
       {...props}>
