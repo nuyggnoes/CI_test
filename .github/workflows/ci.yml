@@ -38,3 +38,6 @@ jobs:
 
       - name: Publish to Chromatic
         run: npx chromatic --project-token=${{ secrets.CHROMATIC_PROJECT_TOKEN }} --only-changed --exit-zero-on-changes
+
+      - name: Run Cypress E2E Tests
+        run: npm run e2e
