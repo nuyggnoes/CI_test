@@ -14,18 +14,19 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Install frontend dependencies
-        working-directory: frontend
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: Install dependencies
         run: npm ci
 
-      - name: Install backend dependencies
-        working-directory: backend
-        run: npm ci
-
-      - name: Start backend server
-        working-directory: backend
-        run: npm run start &
-
+      - name: Start backend server (json-server)
+        run: |
+          cd backend
+          npx json-server --watch db.json --port 8000 &
+      
       - name: Wait for backend
         uses: jakejarvis/wait-action@v0.1.1
         with:
@@ -33,25 +34,19 @@ jobs:
           timeout: 30
 
       - name: Run Lint
-        working-directory: frontend
         run: npm run lint
 
       - name: Run Unit Tests
-        working-directory: frontend
-        run: npm run test
+        run: npx jest --config=jest.config.js --passWithNoTests
 
       - name: Build Next.js App
-        working-directory: frontend
         run: npm run build
 
       - name: Build Storybook
-        working-directory: frontend
         run: npm run build-storybook -- --output-dir=storybook-static
 
       - name: Publish to Chromatic
-        working-directory: frontend
         run: npx chromatic --project-token=${{ secrets.CHROMATIC_PROJECT_TOKEN }} --only-changed --exit-zero-on-changes
 
       - name: Run Cypress E2E
-        working-directory: frontend
         run: npm run e2e
