@@ -27,7 +27,7 @@ jobs:
       - name: Start backend server (json-server)
         run: |
           cd backend
-          npx json-server --watch db.json --port 8000 &
+          node server.js &
       
       - name: Wait for backend
         uses: jakejarvis/wait-action@v0.1.1
@@ -49,6 +49,12 @@ jobs:
 
       - name: Publish to Chromatic
         run: npx chromatic --project-token=${{ secrets.CHROMATIC_PROJECT_TOKEN }} --only-changed --exit-zero-on-changes
+
+      - name: Manually test login
+        run: |
+          curl -X POST http://localhost:8000/login \
+          -H "Content-Type: application/json" \
+          -d '{"email":"test@test.com", "password":"1234"}'
 
       - name: Run Cypress E2E
         run: npm run e2e
