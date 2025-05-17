@@ -39,5 +39,9 @@ jobs:
       - name: Publish to Chromatic
         run: npx chromatic --project-token=${{ secrets.CHROMATIC_PROJECT_TOKEN }} --only-changed --exit-zero-on-changes
 
+      - name: Start JSON Server
+        run: |
+          npx json-server --watch backend/db.json --port 8000 &
+
       - name: Run Cypress E2E Tests
         run: npm run e2e
